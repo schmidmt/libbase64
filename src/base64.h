@@ -1,3 +1,6 @@
+#ifndef _BASE64_H
+#define _BASE64_H
+
 /*
  *LibBase64 A library for base64 encoding/decoding
  *Copyright © 2015 Michael T. Schmidt <schmidmt@gmail.com>
@@ -43,7 +46,7 @@ size_t Base64Encode(char * encoded, const char * string, size_t len);
  * @param @c len Length of the string to decode.
  * @returns @c size_t Size of decoded version of string.
  */
-size_t Base64Decode_size(const char * encoded);
+size_t Base64Decode_size(size_t size);
 
 /**
  * @brief Decode a string from Base 64 (https://tools.ietf.org/html/rfc4648)
@@ -55,3 +58,5 @@ size_t Base64Decode_size(const char * encoded);
  * @returns @c size_t Length of encoded string or zero if error
  */
 size_t Base64Decode(char * string, const char * encoded, size_t len);
+
+#endif /*_BASE64_H */

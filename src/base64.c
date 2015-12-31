@@ -72,9 +72,15 @@ size_t Base64Encode_size(size_t len)
 
 size_t Base64Encode(char * encoded, const char * string, size_t len)
 {
+	/* Map
+	* xxxxxxxx xxxxxxxx xxxxxxxx
+	* ------       ---- --
+	*       --- ---       ------
+	*   0      1      2     3
+	*/
 	char * p = encoded;
 	size_t i;
-	for (i = 0; i < len-2; i += 3) {
+	for (i = 0; i < len-2 && len >= 3; i += 3) {
 		*p++ = basis64[(int)((string[i] >> 2) & 0x3F)];
 		*p++ = basis64[(int)((string[i] & 0x3) << 4) | ((string[i+1] & 0xF0) >> 4)];
 		*p++ = basis64[(int)((string[i+1] & 0xF) << 2) | ((string[i+2] & 0xC0) >> 6)];
@@ -97,17 +103,19 @@ size_t Base64Encode(char * encoded, const char * string, size_t len)
 	return p - encoded;
 }
 
-size_t Base64Decode_size(const char * encoded)
+size_t Base64Decode_size(size_t size)
 {
-	size_t i = 0;
-	while (b64_to_six[(int)(encoded[++i])] < 64);
-	return ((i + 3) / 4) * 3;
+	return ((size + 3) / 4) * 3;
 }
-
-
 
 size_t Base64Decode(char * string, const char * encoded, size_t len)
 {
+	/* Map
+	* xxxxxxxx xxxxxxxx xxxxxxxx
+	* ------       ---- --
+	*       --- ---       ------
+	*   0      1      2     3
+	*/
 	size_t i;
 	char * p = string;
 	char a, b, c, d;
