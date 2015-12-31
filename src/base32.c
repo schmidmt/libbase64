@@ -35,7 +35,6 @@ size_t Base32Encode_size(size_t len)
 	return ((len + 4) / 5 * 8) + 1;
 }
 
-
 size_t Base32Encode(char * encoded, const char * string, size_t len)
 {
 	/* Map

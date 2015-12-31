@@ -10,7 +10,7 @@ const size_t out_sizes[]  = {8,          8,          8,           16};
 
 const size_t n_vectors = sizeof(in_vectors) / sizeof(in_vectors[0]);
 
-START_TEST(rfc4848_vectors_encode_size)
+START_TEST(rfc4648_vectors_encode_size)
 {
 	for (int i = 0; i < n_vectors; ++i) {
 		ck_assert_int_ge(Base32Encode_size(in_sizes[i]), out_sizes[i]);
@@ -18,7 +18,7 @@ START_TEST(rfc4848_vectors_encode_size)
 }
 END_TEST
 
-START_TEST(rfc4848_vectors_encode)
+START_TEST(rfc4648_vectors_encode)
 {
 	char tmp[20];
 	size_t size;
@@ -30,7 +30,7 @@ START_TEST(rfc4848_vectors_encode)
 }
 END_TEST
 
-START_TEST(rfc4848_vectors_decode_size)
+START_TEST(rfc4648_vectors_decode_size)
 {
 	for (int i = 0; i < n_vectors; ++i) {
 		ck_assert_int_ge(Base32Decode_size(out_sizes[i]), in_sizes[i]);
@@ -38,7 +38,7 @@ START_TEST(rfc4848_vectors_decode_size)
 }
 END_TEST
 
-START_TEST(rfc4848_vectors_decode)
+START_TEST(rfc4648_vectors_decode)
 {
 
 	char tmp[20];
@@ -57,11 +57,11 @@ Suite * base64_suite(void)
 	TCase *tc_basic;
 	
 	s = suite_create("Base32");
-	tc_basic = tcase_create("Basic");
-	tcase_add_test(tc_basic, rfc4848_vectors_encode_size);
-	tcase_add_test(tc_basic, rfc4848_vectors_decode_size);
-	tcase_add_test(tc_basic, rfc4848_vectors_encode);
-	tcase_add_test(tc_basic, rfc4848_vectors_decode);
+	tc_basic = tcase_create("RFC4648");
+	tcase_add_test(tc_basic, rfc4648_vectors_encode_size);
+	tcase_add_test(tc_basic, rfc4648_vectors_decode_size);
+	tcase_add_test(tc_basic, rfc4648_vectors_encode);
+	tcase_add_test(tc_basic, rfc4648_vectors_decode);
 	suite_add_tcase(s, tc_basic);
 	
 	return s;
