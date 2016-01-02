@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 AC_PREREQ([2.64])
 
-AC_INIT([base64],
+AC_INIT([basen],
         [m4_esyscmd_s([./get-version])],
         [schmidmt@gmail.com])
 AC_CONFIG_SRCDIR([src/base64.c])
