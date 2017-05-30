@@ -1,0 +1,20 @@
+language: c
+compiler:
+    - gcc
+
+addons:
+    apt:
+        sources:
+            - ubuntu-toolchain-r-test
+
+        packages:
+            - check
+            - lcov
+
+script: 
+    - ./autogen.sh 
+    - ./configure --enable-tests --enable-code-coverage 
+    - make check-code-coverage
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
