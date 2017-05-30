@@ -15,7 +15,7 @@ const size_t n_vectors = sizeof(in_vectors) / sizeof(in_vectors[0]);
 START_TEST(rfc4648_vectors_encode_size)
 {
 	for (int i = 0; i < n_vectors; ++i) {
-		ck_assert_int_ge(Base64Encode_size(in_sizes[i]), out_sizes[i]);
+		ck_assert(Base64Encode_size(in_sizes[i]) >= out_sizes[i]);
 	}
 }
 END_TEST
@@ -35,7 +35,7 @@ END_TEST
 START_TEST(rfc4648_vectors_decode_size)
 {
 	for (int i = 0; i < n_vectors; ++i) {
-		ck_assert_int_ge(Base64Decode_size(out_sizes[i]), in_sizes[i]);
+		ck_assert(Base64Decode_size(out_sizes[i]) >= in_sizes[i]);
 	}
 }
 END_TEST
